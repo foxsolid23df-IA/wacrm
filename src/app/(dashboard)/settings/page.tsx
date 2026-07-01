@@ -1,5 +1,4 @@
 'use client';
-import { useLanguage } from '@/hooks/use-language';
 
 import { useMemo, type ReactNode } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -28,7 +27,6 @@ export default function SettingsPage() {
   const searchParams = useSearchParams();
   const { defaultCurrency } = useAuth();
   const { mode } = useTheme();
-  const { locale } = useLanguage();
 
   // The URL (`?tab=`) is the single source of truth for the active
   // section â€” deep-linkable, and it keeps the existing links in the
@@ -48,10 +46,9 @@ export default function SettingsPage() {
   const hints: Partial<Record<SettingsSection, ReactNode>> = useMemo(
     () => ({
       appearance: mode.charAt(0).toUpperCase() + mode.slice(1),
-      language: locale.toUpperCase(),
       deals: defaultCurrency,
     }),
-    [mode, locale, defaultCurrency],
+    [mode, defaultCurrency],
   );
 
   const panel: Record<SettingsSection, ReactNode> = {
