@@ -2,7 +2,7 @@
 
 import { Check, Globe } from "lucide-react";
 
-import { useLanguage } from "@/hooks/use-language";
+import { useLanguage, useT } from "@/hooks/use-language";
 import { LOCALES } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
 import { SettingsPanelHead } from "./settings-panel-head";
@@ -14,18 +14,19 @@ const LOCALE_LABELS: Record<string, { name: string; flag: string }> = {
 
 export function LanguagePanel() {
   const { locale, setLocale } = useLanguage();
+  const t = useT();
 
   return (
     <section className="max-w-3xl animate-in fade-in-50 duration-200">
       <SettingsPanelHead
-        title="Language"
-        description="Choose the language used across the app. Saved to this device."
+        title={t("settings.language.title")}
+        description={t("settings.language.description")}
       />
 
       <div className="space-y-4">
         <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
           <Globe className="size-4 text-muted-foreground" />
-          Language
+          {t("settings.language.heading")}
         </h3>
 
         <div
@@ -62,7 +63,7 @@ export function LanguagePanel() {
                 {isActive && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[11px] font-medium text-primary">
                     <Check className="h-3 w-3" />
-                    Active
+                    {t("settings.language.active")}
                   </span>
                 )}
               </button>

@@ -89,3 +89,17 @@ export function useLanguage(): LanguageContextValue {
   }
   return ctx;
 }
+
+/**
+ * Hook that returns a `t()` function bound to the current i18n instance.
+ * Re-renders the component when the language changes so translations update.
+ */
+export function useT(): (key: string, options?: Record<string, unknown>) => string {
+  const [, setTick] = useState(0);
+  useEffect(() => {
+    const handler = () => setTick((t) => t + 1);
+    i18n.on("languageChanged", handler);
+    return () => i18n.off("languageChanged", handler);
+  }, []);
+  return i18n.t.bind(i18n);
+}

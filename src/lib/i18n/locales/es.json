@@ -1,12 +1,21 @@
 {
   "settings.title": "Ajustes",
   "settings.description": "Todo en un solo lugar — tu cuenta y tu espacio de trabajo. Elige una sección para administrarla.",
-  "settings.sections.language": "Idioma",
-  "settings.sections.language.description": "Elige el idioma usado en toda la aplicación. Se guarda en este dispositivo.",
-  "settings.sections.language.english": "Inglés",
-  "settings.sections.language.spanish": "Español",
-  "settings.sections.language.active": "Activo",
-  "settings.overview.language": "Idioma",
+  "settings.language.title": "Idioma",
+  "settings.language.description": "Elige el idioma usado en toda la aplicación. Se guarda en este dispositivo.",
+  "settings.language.heading": "Idioma",
+  "settings.language.active": "Activo",
   "settings.rail.account": "Cuenta",
-  "settings.rail.workspace": "Espacio de trabajo"
+  "settings.rail.workspace": "Espacio de trabajo",
+  "settings.section.overview": "Resumen",
+  "settings.section.profile": "Tu perfil",
+  "settings.section.security": "Inicio de sesión y seguridad",
+  "settings.section.appearance": "Apariencia",
+  "settings.section.language": "Idioma",
+  "settings.section.whatsapp": "WhatsApp",
+  "settings.section.templates": "Plantillas",
+  "settings.section.fields": "Campos y etiquetas",
+  "settings.section.deals": "Negocios y moneda",
+  "settings.section.members": "Miembros del equipo",
+  "settings.section.api": "Claves de API"
 }

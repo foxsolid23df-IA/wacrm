@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from 'react';
 
+import { useT } from '@/hooks/use-language';
 import { cn } from '@/lib/utils';
 import {
   RAIL_GROUPS,
@@ -30,6 +31,7 @@ export function SettingsRail({
   onSelect: (section: SettingsSection) => void;
   hints?: Partial<Record<SettingsSection, ReactNode>>;
 }) {
+  const t = useT();
   const activeRef = useRef<HTMLButtonElement>(null);
 
   // When horizontal (mobile), keep the active chip in view. On desktop
@@ -64,7 +66,7 @@ export function SettingsRail({
           >
             {label ? (
               <div className="hidden px-3 pt-3.5 pb-1.5 text-[11px] font-semibold tracking-[0.09em] text-muted-foreground uppercase lg:block">
-                {label}
+                {t(`settings.rail.${group}`)}
               </div>
             ) : null}
             {items.map((s) => {
@@ -87,7 +89,7 @@ export function SettingsRail({
                   )}
                 >
                   <Icon className="size-4 shrink-0" />
-                  <span className="flex-1">{meta.label}</span>
+                  <span className="flex-1">{t(`settings.section.${s}`)}</span>
                   {hints?.[s] != null ? (
                     <span
                       className={cn(

@@ -1,12 +1,21 @@
 {
   "settings.title": "Settings",
   "settings.description": "Everything in one place — your account and your workspace. Pick a section to manage it.",
-  "settings.sections.language": "Language",
-  "settings.sections.language.description": "Choose the language used across the app. Saved to this device.",
-  "settings.sections.language.english": "English",
-  "settings.sections.language.spanish": "Spanish",
-  "settings.sections.language.active": "Active",
-  "settings.overview.language": "Language",
+  "settings.language.title": "Language",
+  "settings.language.description": "Choose the language used across the app. Saved to this device.",
+  "settings.language.heading": "Language",
+  "settings.language.active": "Active",
   "settings.rail.account": "Account",
-  "settings.rail.workspace": "Workspace"
+  "settings.rail.workspace": "Workspace",
+  "settings.section.overview": "Overview",
+  "settings.section.profile": "Your profile",
+  "settings.section.security": "Login & security",
+  "settings.section.appearance": "Appearance",
+  "settings.section.language": "Language",
+  "settings.section.whatsapp": "WhatsApp",
+  "settings.section.templates": "Templates",
+  "settings.section.fields": "Fields & tags",
+  "settings.section.deals": "Deals & currency",
+  "settings.section.members": "Team members",
+  "settings.section.api": "API keys"
 }
