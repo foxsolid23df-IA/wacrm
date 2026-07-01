@@ -11,6 +11,7 @@ import {
 import i18n, {
   DEFAULT_LOCALE,
   LOCALE_STORAGE_KEY,
+  initI18n,
   isLocale,
   type Locale,
 } from "@/lib/i18n/config";
@@ -38,6 +39,11 @@ function readInitialLocale(): Locale {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(readInitialLocale);
 
+  // Initialize i18n once on first mount
+  useEffect(() => {
+    initI18n();
+  }, []);
+
   const setLocale = useCallback((next: Locale) => {
     setLocaleState(next);
     document.documentElement.lang = next;
@@ -52,7 +58,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Sync from other tabs
   useEffect(() => {
     function onStorage(e: StorageEvent) {
-      if (e.key === LOCALE_STORAGE_KEY && isLocale(e.newValue) && e.newValue !== locale) {
+      if (
+        e.key === LOCALE_STORAGE_KEY &&
+        isLocale(e.newValue) &&
+        e.newValue !== locale
+      ) {
         setLocaleState(e.newValue);
         document.documentElement.lang = e.newValue;
         i18n.changeLanguage(e.newValue);

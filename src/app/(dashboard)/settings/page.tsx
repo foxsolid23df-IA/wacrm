@@ -1,5 +1,5 @@
+'use client';
 import { useLanguage } from '@/hooks/use-language';
-﻿'use client';
 
 import { useMemo, type ReactNode } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';

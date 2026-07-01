@@ -1,5 +1,4 @@
 ﻿import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
 
 import en from "./locales/en.json";
 import es from "./locales/es.json";
@@ -14,15 +13,24 @@ export function isLocale(value: unknown): value is Locale {
   return typeof value === "string" && (LOCALES as readonly string[]).includes(value);
 }
 
-const saved = typeof window !== "undefined" ? localStorage.getItem(LOCALE_STORAGE_KEY) : null;
-const initialLocale = isLocale(saved) ? saved : DEFAULT_LOCALE;
+let initialized = false;
 
-i18n.use(initReactI18next).init({
-  resources: { en: { translation: en }, es: { translation: es } },
-  lng: initialLocale,
-  fallbackLng: DEFAULT_LOCALE,
-  interpolation: { escapeValue: false },
-  returnObjects: false,
-});
+export function initI18n(locale?: string): void {
+  if (initialized) return;
+  initialized = true;
+  const lng =
+    locale ??
+    (typeof window !== "undefined"
+      ? localStorage.getItem(LOCALE_STORAGE_KEY)
+      : null) ??
+    DEFAULT_LOCALE;
+  i18n.init({
+    resources: { en: { translation: en }, es: { translation: es } },
+    lng: isLocale(lng) ? lng : DEFAULT_LOCALE,
+    fallbackLng: DEFAULT_LOCALE,
+    interpolation: { escapeValue: false },
+    returnObjects: false,
+  });
+}
 
 export default i18n;
