@@ -1,0 +1,12 @@
+﻿{
+  "settings.title": "Settings",
+  "settings.description": "Everything in one place — your account and your workspace. Pick a section to manage it.",
+  "settings.sections.language": "Language",
+  "settings.sections.language.description": "Choose the language used across the app. Saved to this device.",
+  "settings.sections.language.english": "English",
+  "settings.sections.language.spanish": "Spanish",
+  "settings.sections.language.active": "Active",
+  "settings.overview.language": "Language",
+  "settings.rail.account": "Account",
+  "settings.rail.workspace": "Workspace"
+}

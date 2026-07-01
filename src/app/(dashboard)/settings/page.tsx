@@ -1,4 +1,5 @@
-'use client';
+import { useLanguage } from '@/hooks/use-language';
+﻿'use client';
 
 import { useMemo, type ReactNode } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -10,6 +11,7 @@ import { SettingsOverview } from '@/components/settings/settings-overview';
 import { ProfileForm } from '@/components/settings/profile-form';
 import { SecurityPanel } from '@/components/settings/security-panel';
 import { AppearancePanel } from '@/components/settings/appearance-panel';
+import { LanguagePanel } from '@/components/settings/language-panel';
 import { WhatsAppConfig } from '@/components/settings/whatsapp-config';
 import { TemplateManager } from '@/components/settings/template-manager';
 import { FieldsAndTagsPanel } from '@/components/settings/fields-and-tags-panel';
@@ -26,11 +28,12 @@ export default function SettingsPage() {
   const searchParams = useSearchParams();
   const { defaultCurrency } = useAuth();
   const { mode } = useTheme();
+  const { locale } = useLanguage();
 
   // The URL (`?tab=`) is the single source of truth for the active
-  // section — deep-linkable, and it keeps the existing links in the
+  // section â€” deep-linkable, and it keeps the existing links in the
   // app sidebar/header working. Legacy tab values (tags, custom-fields)
-  // resolve onto their new home; unknown/empty → the Overview landing.
+  // resolve onto their new home; unknown/empty â†’ the Overview landing.
   const section = resolveSection(searchParams.get('tab'));
 
   const go = (next: SettingsSection) => {
@@ -45,9 +48,10 @@ export default function SettingsPage() {
   const hints: Partial<Record<SettingsSection, ReactNode>> = useMemo(
     () => ({
       appearance: mode.charAt(0).toUpperCase() + mode.slice(1),
+      language: locale.toUpperCase(),
       deals: defaultCurrency,
     }),
-    [mode, defaultCurrency],
+    [mode, locale, defaultCurrency],
   );
 
   const panel: Record<SettingsSection, ReactNode> = {
@@ -55,6 +59,7 @@ export default function SettingsPage() {
     profile: <ProfileForm />,
     security: <SecurityPanel />,
     appearance: <AppearancePanel />,
+    language: <LanguagePanel />,
     whatsapp: <WhatsAppConfig />,
     templates: <TemplateManager />,
     fields: <FieldsAndTagsPanel />,
@@ -70,7 +75,7 @@ export default function SettingsPage() {
           Settings
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Everything in one place — your account and your workspace. Pick a
+          Everything in one place â€” your account and your workspace. Pick a
           section to manage it.
         </p>
       </div>

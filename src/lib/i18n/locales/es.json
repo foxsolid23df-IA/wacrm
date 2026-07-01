@@ -1,0 +1,12 @@
+﻿{
+  "settings.title": "Ajustes",
+  "settings.description": "Todo en un solo lugar — tu cuenta y tu espacio de trabajo. Elige una sección para administrarla.",
+  "settings.sections.language": "Idioma",
+  "settings.sections.language.description": "Elige el idioma usado en toda la aplicación. Se guarda en este dispositivo.",
+  "settings.sections.language.english": "Inglés",
+  "settings.sections.language.spanish": "Español",
+  "settings.sections.language.active": "Activo",
+  "settings.overview.language": "Idioma",
+  "settings.rail.account": "Cuenta",
+  "settings.rail.workspace": "Espacio de trabajo"
+}
