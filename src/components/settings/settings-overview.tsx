@@ -6,6 +6,7 @@ import { ChevronRight, Loader2 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { useAuth } from '@/hooks/use-auth';
 import { useTheme } from '@/hooks/use-theme';
+import { useT } from '@/hooks/use-language';
 import { THEMES } from '@/lib/themes';
 import { CURRENCIES } from '@/lib/currency';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -38,6 +39,7 @@ export function SettingsOverview({
   const { user, profile, accountId, accountRole, defaultCurrency, canManageMembers } =
     useAuth();
   const { mode, theme } = useTheme();
+  const t = useT();
 
   const [counts, setCounts] = useState<OverviewCounts | null>(null);
   const [countsLoading, setCountsLoading] = useState(true);
@@ -137,7 +139,7 @@ export function SettingsOverview({
     };
   }, [user, accountId, canManageMembers]);
 
-  const displayName = profile?.full_name || profile?.email || 'Your account';
+  const displayName = profile?.full_name || profile?.email || t('settings.overview.your_account');
   const initial = (profile?.full_name || profile?.email || 'U').charAt(0).toUpperCase();
   const roleMeta = accountRole ? ROLE_META[accountRole] : null;
   const RoleIcon = roleMeta?.icon;
@@ -158,14 +160,14 @@ export function SettingsOverview({
       section: 'whatsapp',
       loading: whatsappLoading,
       subtitle: !whatsapp?.configured ? (
-        'Not set up yet'
+        t('settings.overview.whatsapp.not_set_up')
       ) : whatsapp.connected ? (
         <>
-          <StatusDot tone="ok" /> Connected
+          <StatusDot tone="ok" /> {t('settings.overview.whatsapp.connected')}
         </>
       ) : (
         <>
-          <StatusDot tone="muted" /> Needs reconnecting
+          <StatusDot tone="muted" /> {t('settings.overview.whatsapp.needs_reconnect')}
         </>
       ),
     },
@@ -174,12 +176,10 @@ export function SettingsOverview({
       loading: countsLoading,
       subtitle:
         counts?.members == null
-          ? 'View team members'
-          : `${counts.members} member${counts.members === 1 ? '' : 's'}${
+          ? t('settings.overview.members.view')
+          : `${t('settings.overview.members.count', { count: counts.members })}${
               counts.pendingInvites
-                ? ` · ${counts.pendingInvites} pending invite${
-                    counts.pendingInvites === 1 ? '' : 's'
-                  }`
+                ? ` · ${t('settings.overview.members.pending', { count: counts.pendingInvites })}`
                 : ''
             }`,
     },
@@ -188,10 +188,10 @@ export function SettingsOverview({
       loading: countsLoading,
       subtitle:
         counts?.templates == null
-          ? 'Manage message templates'
-          : `${counts.templates} template${counts.templates === 1 ? '' : 's'}${
+          ? t('settings.overview.templates.view')
+          : `${t('settings.overview.templates.count', { count: counts.templates })}${
               counts.templatesPending
-                ? ` · ${counts.templatesPending} pending review`
+                ? ` · ${t('settings.overview.templates.pending', { count: counts.templatesPending })}`
                 : ''
             }`,
     },
@@ -205,15 +205,13 @@ export function SettingsOverview({
       loading: countsLoading,
       subtitle:
         counts?.tags == null && counts?.customFields == null
-          ? 'Tags and custom fields'
-          : `${counts?.tags ?? 0} tag${counts?.tags === 1 ? '' : 's'} · ${
-              counts?.customFields ?? 0
-            } custom field${counts?.customFields === 1 ? '' : 's'}`,
+          ? t('settings.overview.fields.view')
+          : `${t('settings.overview.fields.tags', { count: counts?.tags ?? 0 })} · ${t('settings.overview.fields.custom_fields', { count: counts?.customFields ?? 0 })}`,
     },
     {
       section: 'appearance',
       loading: false,
-      subtitle: `${cap(mode)} mode · ${themeName} accent`,
+      subtitle: t('settings.overview.accent', { mode: cap(mode), theme: themeName }),
     },
   ];
 
@@ -267,12 +265,12 @@ export function SettingsOverview({
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold text-foreground">
-                  {meta.label}
+                  {t(`settings.section.${section}`)}
                 </span>
                 <span className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">
                   {loading ? (
                     <>
-                      <Loader2 className="size-3 animate-spin" /> Loading…
+                      <Loader2 className="size-3 animate-spin" /> {t('settings.overview.loading')}
                     </>
                   ) : (
                     subtitle
